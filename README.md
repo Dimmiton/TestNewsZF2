@@ -1,118 +1,82 @@
-ZendSkeletonApplication
+###TestNewsZF2
+
 =======================
 
-Introduction
-------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
-
-Installation using Composer
----------------------------
-
-The easiest way to create a new ZF2 project is to use [Composer](https://getcomposer.org/). If you don't have it already installed, then please install as per the [documentation](https://getcomposer.org/doc/00-intro.md).
+Тестовое задание №1
 
 
-Create your new ZF2 project:
-
-    composer create-project -n -sdev zendframework/skeleton-application path/to/install
-
-
-
-### Installation using a tarball with a local Composer
-
-If you don't have composer installed globally then another way to create a new ZF2 project is to download the tarball and install it:
-
-1. Download the [tarball](https://github.com/zendframework/ZendSkeletonApplication/tarball/master), extract it and then install the dependencies with a locally installed Composer:
-
-        cd my/project/dir
-        curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-    
-
-2. Download composer into your project directory and install the dependencies:
-
-        curl -s https://getcomposer.org/installer | php
-        php composer.phar install
-
-If you don't have access to curl, then install Composer into your project as per the [documentation](https://getcomposer.org/doc/00-intro.md).
-
-Web server setup
-----------------
-
-### PHP CLI server
-
-The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root
-directory:
-
-    php -S 0.0.0.0:8080 -t public/ public/index.php
-
-This will start the cli-server on port 8080, and bind it to all network
-interfaces.
-
-**Note:** The built-in CLI server is *for development only*.
-
-### Vagrant server
-
-This project supports a basic [Vagrant](http://docs.vagrantup.com/v2/getting-started/index.html) configuration with an inline shell provisioner to run the Skeleton Application in a [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
-
-1. Run vagrant up command
-
-    vagrant up
-
-2. Visit [http://localhost:8085](http://localhost:8085) in your browser
-
-Look in [Vagrantfile](Vagrantfile) for configuration details.
-
-### Apache setup
-
-To setup apache, setup a virtual host to point to the public/ directory of the
-project and you should be ready to go! It should look something like below:
-
-    <VirtualHost *:80>
-        ServerName zf2-app.localhost
-        DocumentRoot /path/to/zf2-app/public
-        <Directory /path/to/zf2-app/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-            <IfModule mod_authz_core.c>
-            Require all granted
-            </IfModule>
-        </Directory>
-    </VirtualHost>
-
-### Nginx setup
-
-To setup nginx, open your `/path/to/nginx/nginx.conf` and add an
-[include directive](http://nginx.org/en/docs/ngx_core_module.html#include) below
-into `http` block if it does not already exist:
-
-    http {
-        # ...
-        include sites-enabled/*.conf;
-    }
+БД - MySql
+Language - PHP
+Client language - Javascript
 
 
-Create a virtual host configuration file for your project under `/path/to/nginx/sites-enabled/zf2-app.localhost.conf`
-it should look something like below:
+реализовать данную задачу с использованием фрэймворка Zend Framewrok или Yii (желательно ZF)
+должна быть модульная структура, инициализация через Zend_Application(для ZF)
+(если задание выполнено без модульной структуры, то сразу минус несколько баллов)
 
-    server {
-        listen       80;
-        server_name  zf2-app.localhost;
-        root         /path/to/zf2-app/public;
 
-        location / {
-            index index.php;
-            try_files $uri $uri/ @php;
-        }
+### Написать модуль редактирования и вывода новостей
 
-        location @php {
-            # Pass the PHP requests to FastCGI server (php-fpm) on 127.0.0.1:9000
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_param  SCRIPT_FILENAME /path/to/zf2-app/public/index.php;
-            include fastcgi_params;
-        }
-    }
+Модуль создания и редактирования новостей (админиский модуль):
 
-Restart the nginx, now you should be ready to go!
+Вывод всех новостей с сортировкой по дате(последние сверху) 	Home
+Создание и редактирование новостей				Add/Edit new
+У каждой новости есть поля: название, дата публикации, текст, тема(новость привязывается к одной теме из списка)
+Для редактирования поля дата использовать календарь jquery (http://jqueryui.com/)
+
+
+Модуль вывода новостей
+
+Слева вывод всех годов для которых есть публикации, для каждого года вывод месяцев в которых были публикации в скобках указывается количество публикаций за этот месяц, в виде
+
+2010
+    сентябрь (1)
+    июль (4)
+    июнь (7)
+    март (12)
+    февраль (3)
+
+2009
+
+при нажатии на год вывод всех новостей этого года, при нажатии на месяц вывод всех новостей этого месяца.
+
+под годами вывод всех тем, в скобках количество публикаций по теме
+
+тема1 (2)
+тема2 (5)
+тема3 (7)
+
+при клике на название темы показываются все новости для которых выбрана эта тема
+
+
+
+справа вывод всех новостей в виде
+
+Название
+дата публикации, тема
+Краткий текст(полный текст обрезанный 256символов) ...
+                                             читать далее(ссылка на новость)
+
+при клике на "читать далее" показывается новость в виде
+
+Название
+дата публикации, тема
+Ткст новости полностью
+
+				все новости (ссылка на страницу с новостями)
+
+
+вывод новостей по 5 на страницу, внизу страницы пейджер(вывод всех страниц, текущая страница подсвечивается)
+
+
+
+все запросы писать на sql без использования Zend_Db_Table_Select и Yii Query Builder или Doctrine
+
+
+
+глямурный дизайн не обязателен
+главное реализовать данную задачу.
+
+
+
+срок выполнения: строгих ограничений нет, зависит от опыта.
