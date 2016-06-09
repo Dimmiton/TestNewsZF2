@@ -1,0 +1,21 @@
+<?php
+$title = 'Newses By Yearear';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<table class="table">
+		<tr>
+			<th>Title</th>
+			<th>Text</th>
+			<th>theme_id</th>
+		</tr>
+		<?php foreach ($this->newses as $newses) : ?>
+		<tr>
+			<td><?php echo $this->escapeHtml($newses->title);?></td>
+			<td><?php echo $this->escapeHtml($newses->text);?></td>
+			<td><?php echo $this->escapeHtml($newses->theme_id);?></td>
+		</tr>
+		<?php endforeach; ?>
+</table>

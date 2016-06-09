@@ -1,0 +1,38 @@
+<table>
+	<?php $x=0;
+	foreach ($this->date as $date) : ?>
+	<?php	if ($x<>$date->year): ?>
+		<?php $x = $date->year; ?>
+		<th><a href="<?php echo $this->url('newses',
+            array('action'=>'NewsesByYear', 'id' => $date->year));?>">
+			<?php echo '<br>' . $x; ?> 
+		</a></th>
+	<?php endif; ?>		
+	<tr>
+	<td>&nbsp;
+        <a href="<?php echo $this->url('newses',
+            array('action'=>'NewsesByMonth', 'id' => $date->year, 'id1' => $date->date));?>">
+				<?php echo $this->escapeHtml($date->month);?>
+				(<?php echo $this->escapeHtml($date->themesCount);?>)
+		</a>
+    </td>
+	</tr>
+	<?php endforeach; ?>
+</table>	
+<br></br>
+<table>
+<tr>
+		<th>theme</th>
+</tr>
+	<?php foreach ($this->theme as $theme) : ?>
+	<tr>
+	<td>
+        <a href="<?php echo $this->url('newses',
+            array('action'=>'NewsesByTheme', 'id' => $theme->theme_id));?>">
+				<?php echo $this->escapeHtml($theme->theme_id);?>
+				(<?php echo $this->escapeHtml($theme->themesCount);?>)
+			</a>
+    </td>
+	</tr>
+	<?php endforeach; ?></tr>
+</table>

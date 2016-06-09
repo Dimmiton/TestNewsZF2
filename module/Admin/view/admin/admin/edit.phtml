@@ -1,0 +1,49 @@
+<?php
+$title = 'Edit news';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+     'admin',
+     array(
+         'action' => 'edit',
+         'news_id'     => $this->news_id,
+    )
+));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('news_id'));
+echo $this->formRow($form->get('date'));
+echo $this->formRow($form->get('theme_id'));
+echo $this->formRow($form->get('title'));
+echo '</br>';
+echo $this->formRow($form->get('text'));
+echo '</br>';
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+?>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+	dateFormat: "yy-mm-dd"
+	});	 
+  });
+  </script>
+</head>
+<body>
+</body>
+</html>

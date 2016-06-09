@@ -1,0 +1,31 @@
+<?php
+
+ $title = 'My News';
+ $this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('admin', array('action'=>'add'));?>">Add news</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>Text</th>
+    <th>Title</th>
+	<th>Date</th>
+	<th>theme_id</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($newses as $news) : ?>
+<tr>
+	<td><?php echo $this->escapeHtml($news->text);?></td>
+    <td><?php echo $this->escapeHtml($news->title);?></td>
+	<td><?php echo $this->escapeHtml($news->date);?></td>
+	<td><?php echo $this->escapeHtml($news->theme_id);?></td>
+    <td>
+        <a href="<?php echo $this->url('admin',
+            array('action'=>'edit', 'news_id' => $news->news_id));?>">Edit</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>

@@ -1,0 +1,16 @@
+<table>
+	<?php foreach ($newses as $newses) : ?>
+	<table>
+	<tr>
+		<p><th><?php echo $this->escapeHtml($newses->title);?></p>
+	</tr>
+	<tr>
+		<p><td><?php echo $this->escapeHtml($newses->date . ',');?>
+		theme_id&nbsp;<?php echo $this->escapeHtml($newses->theme_id);?></td></p>
+	</tr>
+	<tr>
+		<p><td><?php echo $this->escapeHtml($newses->text);?></td></p>
+	</tr>
+	<br></br>
+	<?php endforeach; ?>
+</table>
