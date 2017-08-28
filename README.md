@@ -2,6 +2,17 @@
 
 =======================
 
+Test task
+
+db - MySql
+Language - PHP
+Client language - Javascript
+
+Write module to manage and display news.
+
+
+=======================
+
 Тестовое задание №1
 
 
